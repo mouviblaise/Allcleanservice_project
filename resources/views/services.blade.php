@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nos Services</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
     <style>
         body {
             font-family: 'Segoe UI', sans-serif;
@@ -166,7 +168,25 @@
     </a>
 </div>
 
-<!-- Bootstrap JS (facultatif ici) -->
+
+<div class="mt-5 text-center" data-aos="fade-up">
+    <h4 class="mb-3 text-success">🙏 Merci de votre confiance !</h4>
+    <p class="lead text-success ">
+        Nous sommes heureux de mettre notre savoir-faire à votre service.<br>
+        Contactez-nous dès maintenant pour un service adapté à vos besoins.
+    </p>
+    <a href="{{ route('devis.formulaire') }}" class="btn btn-outline-primary mt-3">
+        📄 Demander un devis personnalisé
+    </a>
+</div>
+
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init();
+</script>
+
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

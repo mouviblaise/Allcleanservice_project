@@ -111,27 +111,45 @@
 
     <!-- Nos Services -->
     <section class="container my-5" id="services">
-        <h2 class="text-center mb-4" data-aos="fade-up">Nos services</h2>
-        <div class="row">
-            @php
-                $servicesApercu = [
-                    ['image' => 'vitres.jpg', 'title' => 'Nettoyage de vitres'],
-                    ['image' => 'sols.jpg', 'title' => 'Nettoyage de sols'],
-                    ['image' => 'vehicules.jpg', 'title' => 'Nettoyage intérieur de véhicules'],
-                    ['image' => 'espaces_verts.jpg', 'title' => 'Entretien des espaces verts'],
-                ];
-            @endphp
-            @foreach($servicesApercu as $s)
-            <div class="col-md-3 mb-4" data-aos="fade-up">
-                <div class="card service-card h-100">
-                    <img src="/images/{{ $s['image'] }}" class="card-img-top" alt="{{ $s['title'] }}">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ $s['title'] }}</h5>
-                    </div>
-                </div>
+        
+<div class="row">
+    @php
+        $servicesApercu = [
+            [
+                'image' => 'vitres.jpg',
+                'title' => 'Nettoyage de vitres',
+                'text'  => 'Des vitres éclatantes, même en hauteur ou difficiles d\'accès.'
+            ],
+            [
+                'image' => 'sols.jpg',
+                'title' => 'Nettoyage de sols',
+                'text'  => 'Sol carrelé, bétonné ou moquette : brillance assurée.'
+            ],
+            [
+                'image' => 'vehicules.jpg',
+                'title' => 'Nettoyage intérieur de véhicules',
+                'text'  => 'Un habitacle impeccable grâce à un nettoyage minutieux.'
+            ],
+            [
+                'image' => 'espaces_verts.jpg',
+                'title' => 'Entretien des espaces verts',
+                'text'  => 'Tonte, taille, nettoyage : vos extérieurs toujours soignés.'
+            ],
+        ];
+    @endphp
+
+    @foreach($servicesApercu as $s)
+    <div class="col-md-3 mb-4" data-aos="fade-up">
+        <div class="card service-card h-100 shadow-sm">
+            <img src="/images/{{ $s['image'] }}" class="card-img-top" alt="{{ $s['title'] }}">
+            <div class="card-body">
+                <h5 class="card-title">{{ $s['title'] }}</h5>
+                <p class="card-text">{{ $s['text'] }}</p>
             </div>
-            @endforeach
         </div>
+    </div>
+    @endforeach
+</div>
 
         <div class="text-center mt-3" data-aos="fade-up">
             <a href="{{ route('services') }}" class="btn btn-success">Voir tous les services</a>
