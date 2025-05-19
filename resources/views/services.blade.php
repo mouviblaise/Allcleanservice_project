@@ -3,185 +3,170 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Demande de devis | All Clean Service</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
+    <title>Nos Services</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            font-family: 'Quicksand', sans-serif;
-            background: url('{{ asset('images/nettoyage-fond.jpg') }}') no-repeat center center fixed;
-            background-size: cover;
-            background-color: #f4f8f7;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f8f9fa;
         }
 
-        .overlay {
-            background: rgba(255, 255, 255, 0.8);
-            min-height: 100vh;
-            padding: 50px 0;
+        .card-service {
+            border-radius: 12px;
+            transition: box-shadow 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+            overflow: hidden;
+            border: 1px solid #eaeaea;
         }
 
-        .form-container {
-            background-color: #fff;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            padding: 40px;
-            animation: fadeIn 0.7s ease-in-out;
+        .card-service:hover {
+            background-color: #f9f9f9;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+            transform: translateY(-4px);
         }
 
-        h2 {
-            font-weight: 600;
+        .card-service .card-title {
+            transition: border-bottom 0.3s ease, color 0.3s ease;
+            display: inline-block;
+            border-bottom: 2px solid transparent;
         }
 
-        .form-control:focus, .form-select:focus {
-            border-color: #28a745;
-            box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+        .card-service:hover .card-title {
+            color: #0d6efd;
+            border-bottom: 2px solid #0d6efd;
         }
 
-        .btn-success {
-            background-color: #28a745;
-            border: none;
-            transition: 0.3s ease;
-        }
-
-        .btn-success:hover {
-            background-color: #218838;
-        }
-
-        #preview {
-            max-height: 200px;
-            margin-top: 10px;
-            border-radius: 10px;
-            display: none;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .form-image-container {
-            display: flex;
-            align-items: stretch;
-            justify-content: space-between;
-            gap: 20px;
-        }
-
-        .form-image-container .image {
-            flex: 1;
-        }
-
-        .form-image-container .form-container {
-            flex: 1;
-        }
-
-        .form-image-container .image img {
-            width: 100%;
-            height: 100%;
+        .card-service .card-img-top {
+            height: 200px;
             object-fit: cover;
-            border-radius: 15px;
+        }
+
+        .services-intro {
+            max-width: 800px;
+            margin: 0 auto;
+            color: #555;
+        }
+
+        @media (max-width: 768px) {
+            .card-service .card-img-top {
+                height: 160px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <div class="overlay">
-        <div class="container my-5">
-            <h2 class="text-center text-success mb-4">Demande de devis</h2>
+<div class="container py-5">
+    <!-- Introduction -->
+    <div class="text-center mb-5 services-intro">
+        <h1 class="mb-3 fw-bold">Découvrez Nos Services Professionnels</h1>
+        <p class="lead">
+            Nous proposons une gamme complète de services de nettoyage et d’entretien adaptés aux particuliers, entreprises, syndics de copropriétés et collectivités. 
+            Notre équipe expérimentée intervient avec rigueur, ponctualité et professionnalisme pour garantir votre satisfaction.
+        </p>
+    </div>
+<div class="mb-4">
+    <a href="{{ route('home') }}" class="btn btn-outline-primary">
+        ← Retour à l'accueil
+    </a>
+</div>
 
-            @if(session('success'))
-                <div class="alert alert-success text-center">
-                    {{ session('success') }}
-                </div>
-            @endif
-
-            <div class="form-image-container">
-                <!-- Image à gauche -->
-                <div class="image">
-                    <img src="{{ asset('images/R.jpg') }}" alt="Image de service" class="img-fluid">
-                </div>
-
-                <!-- Formulaire à droite -->
-                <div class="form-container">
-                    <form action="{{ route('devis.store') }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <label for="nom" class="form-label">Nom</label>
-                                <input type="text" name="nom" id="nom" class="form-control" required>
-                            </div>
-
-                            <div class="col-md-6">
-                                <label for="prenom" class="form-label">Prénom</label>
-                                <input type="text" name="prenom" id="prenom" class="form-control" required>
-                            </div>
-
-                            <div class="col-md-6">
-                                <label for="email" class="form-label">Email</label>
-                                <input type="email" name="email" id="email" class="form-control" required>
-                            </div>
-
-                            <div class="col-md-6">
-                                <label for="telephone" class="form-label">Téléphone</label>
-                                <input type="text" name="telephone" id="telephone" class="form-control" required>
-                            </div>
-
-                            <div class="col-12">
-                                <label for="adresse" class="form-label">Adresse</label>
-                                <input type="text" name="adresse" id="adresse" class="form-control" required>
-                            </div>
-
-                            <div class="col-12">
-                                <label for="service" class="form-label">Service souhaité</label>
-                                <select name="service" id="service" class="form-select" required>
-                                    <option disabled selected>Choisissez un service</option>
-                                    <option>Nettoyage de vitres</option>
-                                    <option>Nettoyage de tout sol</option>
-                                    <option>Nettoyage intérieur de véhicule</option>
-                                    <option>Nettoyage de bureaux, locaux, société</option>
-                                    <option>Entretien espaces verts</option>
-                                    <option>Nettoyage après chantier</option>
-                                    <option>Entretien maison</option>
-                                    <option>Entretien copropriété</option>
-                                    <option>Autres</option>
-                                </select>
-                            </div>
-
-                            <div class="col-12">
-                                <label for="photo" class="form-label">Photo (facultatif)</label>
-                                <input type="file" name="photo" id="photo" class="form-control" accept="image/*" onchange="previewImage(event)">
-                                <img id="preview" src="#" alt="Aperçu" class="img-fluid">
-                            </div>
-                        </div>
-
-                        <button type="submit" class="btn btn-success w-100 mt-4">Envoyer la demande</button>
-                    </form>
+    <!-- Services list -->
+    <div class="row g-4">
+        <!-- Service 1 -->
+        <div class="col-md-4">
+            <div class="card card-service h-100">
+                <img src="images/vitres.jpg" class="card-img-top" alt="Nettoyage de vitres">
+                <div class="card-body">
+                    <h5 class="card-title">Nettoyage de vitres</h5>
+                    <p class="card-text">Des vitres éclatantes grâce à notre expertise, même en hauteur ou difficiles d'accès.</p>
                 </div>
             </div>
+        </div>
 
-            <div class="text-center mt-4">
-                <a href="{{ url('/') }}" class="text-decoration-none text-muted">← Retour à l'accueil</a>
+        <!-- Service 2 -->
+        <div class="col-md-4">
+            <div class="card card-service h-100">
+                <img src="images/sols.jpg" class="card-img-top" alt="Nettoyage de tout sol">
+                <div class="card-body">
+                    <h5 class="card-title">Nettoyage de tout sol</h5>
+                    <p class="card-text">Sol carrelé, bétonné ou en moquette, nos solutions assurent brillance et hygiène optimale.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Service 3 -->
+        <div class="col-md-4">
+            <div class="card card-service h-100">
+                <img src="images/vehicules.jpg" class="card-img-top" alt="Nettoyage intérieur de véhicule">
+                <div class="card-body">
+                    <h5 class="card-title">Nettoyage intérieur de véhicule</h5>
+                    <p class="card-text">Un intérieur de voiture impeccable grâce à un nettoyage minutieux et en profondeur.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Service 4 -->
+        <div class="col-md-4">
+            <div class="card card-service h-100">
+                <img src="images/locaux.jpg" class="card-img-top" alt="Nettoyage de bureaux">
+                <div class="card-body">
+                    <h5 class="card-title">Nettoyage de bureaux, locaux, société</h5>
+                    <p class="card-text">Des espaces professionnels propres et accueillants, adaptés à votre activité.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Service 5 -->
+        <div class="col-md-4">
+            <div class="card card-service h-100">
+                <img src="images/espaces_verts.jpg" class="card-img-top" alt="Entretien espaces verts">
+                <div class="card-body">
+                    <h5 class="card-title">Entretien espaces verts</h5>
+                    <p class="card-text">Tonte, taille, nettoyage... Offrez à vos espaces extérieurs un entretien régulier et soigné.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Service 6 -->
+        <div class="col-md-4">
+            <div class="card card-service h-100">
+                <img src="images/chantier.jpg" class="card-img-top" alt="Nettoyage après chantier">
+                <div class="card-body">
+                    <h5 class="card-title">Nettoyage après chantier</h5>
+                    <p class="card-text">Remise en état rapide et efficace après travaux de construction ou rénovation.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Service 7 -->
+        <div class="col-md-4">
+            <div class="card card-service h-100">
+                <img src="images/residences.jpg" class="card-img-top" alt="Entretien maison">
+                <div class="card-body">
+                    <h5 class="card-title">Entretien maison</h5>
+                    <p class="card-text">Nettoyage quotidien, hebdomadaire ou ponctuel pour une maison toujours impeccable.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Service 8 -->
+        <div class="col-md-4">
+            <div class="card card-service h-100">
+                <img src="images/coproprio.jpg" class="card-img-top" alt="Entretien copropriété">
+                <div class="card-body">
+                    <h5 class="card-title">Entretien copropriété</h5>
+                    <p class="card-text">Cage d’escalier, hall, espaces communs... un cadre agréable pour les résidents.</p>
+                </div>
             </div>
         </div>
     </div>
+</div>
+<div class="text-center mt-5">
+    
+    </a>
+</div>
 
-    <script>
-        function previewImage(event) {
-            const input = event.target;
-            const preview = document.getElementById('preview');
-
-            if (input.files && input.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    preview.src = e.target.result;
-                    preview.style.display = 'block';
-                };
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-    </script>
-
+<!-- Bootstrap JS (facultatif ici) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
